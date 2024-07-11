@@ -1,0 +1,43 @@
+services:
+  api:
+    container_name: llm-studies-api
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    stop_signal: SIGINT
+    environment:
+      - FLASK_SERVER_PORT=9090
+    ports:
+      - 9090:9090
+    volumes:
+      - ./api:/app
+    depends_on:
+      - ollama
+      - botdb
+  
+  ollama:
+    container_name: llm-studies-ollama
+    build:
+      context: .
+      dockerfile: ollama.Dockerfile
+    ports:
+      - 11434:11434
+    volumes:
+      - ./.ollama/ollama:/root/.ollama
+    pull_policy: always
+    tty: true
+    restart: always
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_HOST=0.0.0.0
+    
+  botdb:
+    container_name: llm-studies-botdb
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./.docker/mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=llmstudies
+      - MONGO_INITDB_ROOT_PASSWORD=27peHO3Eri1b

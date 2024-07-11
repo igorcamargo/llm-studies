@@ -1,0 +1,9 @@
+pymongo
+flask
+Flask-HTTPAuth
+pandas
+openpyxl
+ollama
+tqdm
+python-dotenv
+Werkzeug
