@@ -23,14 +23,14 @@ def auth_error(status):
 
 
 @app.route('/', methods=['GET'])
-# @auth.login_required
+@auth.login_required
 def index():
     try:
         if not request.is_json:
             raise Exception('Invalid payload!', 400)
         
         content = request.get_json(silent=True)
-        agent   = params.get('agent')
+        agent   = content.get('agent')
         state   = content.get('state')
 
         if not state:

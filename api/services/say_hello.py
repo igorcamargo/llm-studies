@@ -8,6 +8,7 @@ def execute(params: dict) -> dict:
     ## Responses formalized data
     
     # be crative
+    agent = params.get('agent')
 
 
     # ========================================
