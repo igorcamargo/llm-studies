@@ -44,8 +44,8 @@ def execute(params: dict) -> dict:
         prompt=llama_prompt
     )
 
-    sentences = re.split(r'(?<=[.!?]) +', response['response'].replace('\n', ''))
-    sentences = [sentence.strip() for sentence in sentences]
+    sentences = re.split(r'(?<=[.!?])+', response['response'].replace('\n', ''))
+    sentences = list(filter(None, [sentence.strip() for sentence in sentences]))
 
 
     # Response coach message
