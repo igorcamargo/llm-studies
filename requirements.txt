@@ -6,4 +6,5 @@ openpyxl
 ollama
 tqdm
 python-dotenv
+python-decouple
 Werkzeug

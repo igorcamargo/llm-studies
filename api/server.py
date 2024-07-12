@@ -2,16 +2,14 @@
 import os
 import importlib
 
-from dotenv import load_dotenv
+from decouple import config
 from flask import Flask, request, make_response
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
 app     = Flask(__name__)
 auth    = HTTPBasicAuth()
-config  = load_dotenv(".env")
-users   = {os.environ.get("API_USER"): generate_password_hash(os.environ.get("API_PASS"))}
+users   = {config('API_USER'): generate_password_hash(config('API_PASS'))}
 
 
 @auth.verify_password
@@ -21,22 +19,19 @@ def verify_password(username, password):
 
 @auth.error_handler
 def auth_error(status):
-    return Response({}, status)
+    return __make_json_response({}, status)
 
 
 @app.route('/', methods=['GET'])
-@auth.login_required
+# @auth.login_required
 def index():
     try:
-        
-        # ajustar payload
-
         if not request.is_json:
             raise Exception('Invalid payload!', 400)
         
         content = request.get_json(silent=True)
-        state   = content.get('state')
         agent   = params.get('agent')
+        state   = content.get('state')
 
         if not state:
             raise Exception('State is required!', 400)

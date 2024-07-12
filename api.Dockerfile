@@ -19,9 +19,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 COPY /api .
 
-RUN pip3.12 install openpyxl
-RUN apt-get install -y libgl1
-RUN apt-get install sshpass
+# RUN pip3.12 install openpyxl
+# RUN apt-get install -y libgl1
+# RUN apt-get install sshpass
 
 EXPOSE 9090
 
