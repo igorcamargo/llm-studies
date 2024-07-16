@@ -1,0 +1,12 @@
+services:
+  gpt4all:
+    container_name: gpt4all
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./app:/app
+    tty: true
+    platform: linux/amd64

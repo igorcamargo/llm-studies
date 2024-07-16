@@ -2,3 +2,4 @@
 .ollama/
 
 .env
+.DS_Store
